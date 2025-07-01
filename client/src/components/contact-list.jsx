@@ -1,5 +1,5 @@
 import { useAppStore } from "../store";
-import { Avatar, AvatarImage } from "@/components/ui/Avatar.jsx";
+import { Avatar, AvatarImage } from "@/components/ui/avatar.jsx";
 import { HOST, GET_ALL_MESSAGE_ROUTE } from "@/utils/constant.js";
 import { getColor } from "@/lib/utils.js";
 import { apiClient } from "@/lib/api-client.js";
