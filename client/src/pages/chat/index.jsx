@@ -30,7 +30,18 @@ function Chat() {
         const res = await apiClient.get(GET_USER_INFO, {
           withCredentials: true,
         });
-        setUserInfo(res.data);
+
+        if (res?.data) {
+          setUserInfo(res.data);
+
+          if (!res.data.profileSetup) {
+            toast("Please set your profile to continue.");
+            navigate("/profile");
+          }
+        } else {
+          toast.error("Failed to load user. Please log in again.");
+          navigate("/auth");
+        }
       } catch (err) {
         console.error('❌ Failed to fetch user info:', err);
         toast.error("Failed to load user. Please log in again.");
@@ -40,12 +51,15 @@ function Chat() {
       }
     };
 
-    if (!userInfo || !userInfo.profileSetup) {
-      toast("Please Set your Profile To Continue");
-      navigate("/profile");
-    } else if (!userInfo.firstName || !userInfo.lastName) {
+    if (!userInfo) {
+      // User info missing → fetch from server
       fetchUserInfo();
     } else {
+      // Already in store
+      if (!userInfo.profileSetup) {
+        toast("Please set your profile to continue.");
+        navigate("/profile");
+      }
       setLoadingUser(false);
     }
   }, [userInfo, navigate, setUserInfo]);
@@ -53,13 +67,15 @@ function Chat() {
   // ✅ Mark direct messages as seen when user opens chat
   useEffect(() => {
     if (selectedChatType === "direct" && selectedChatData?._id) {
-      apiClient.post(
-        MARK_AS_SEEN_ROUTE,
-        { senderId: selectedChatData._id },
-        { withCredentials: true }
-      ).catch((err) => {
-        console.error("❌ Failed to mark messages as seen:", err);
-      });
+      apiClient
+        .post(
+          MARK_AS_SEEN_ROUTE,
+          { senderId: selectedChatData._id },
+          { withCredentials: true }
+        )
+        .catch((err) => {
+          console.error("❌ Failed to mark messages as seen:", err);
+        });
     }
   }, [selectedChatData?._id, selectedChatType]);
 
@@ -86,7 +102,11 @@ function Chat() {
         </div>
       )}
       <ContactsContainer />
-      {selectedChatType === undefined ? <EmptyChatContainer /> : <ChatContainer />}
+      {selectedChatType === undefined ? (
+        <EmptyChatContainer />
+      ) : (
+        <ChatContainer />
+      )}
     </div>
   );
 }
