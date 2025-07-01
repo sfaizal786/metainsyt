@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
-import { Avatar, AvatarImage } from '@/components/ui/Avatar.jsx'
+import { Avatar, AvatarImage } from '@/components/ui/avatar.jsx'
 import { getColor, colors } from '@/lib/utils.js';
 import { FaTrash, FaPlus } from 'react-icons/fa';
 import { useAppStore } from '../../store'
