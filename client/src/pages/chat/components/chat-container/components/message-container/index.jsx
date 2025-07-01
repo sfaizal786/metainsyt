@@ -6,7 +6,7 @@ import { GET_ALL_MESSAGE_ROUTE, GET_CHANNEL_MESSAGE, HOST } from "../../../../..
 import { MdFolderZip } from "react-icons/md";
 import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/Avatar.jsx";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar.jsx";
 import { getColor } from "@/lib/utils.js";
 
 const MessageContainer = () => {
