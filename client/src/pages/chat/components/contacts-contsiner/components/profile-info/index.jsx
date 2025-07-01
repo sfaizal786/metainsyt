@@ -1,4 +1,4 @@
-import { Avatar, AvatarImage } from "@/components/ui/Avatar.jsx";
+import { Avatar, AvatarImage } from "@/components/ui/avatar.jsx";
 import { useAppStore } from "../../../../../../store";
 import { HOST, LOGOUT_ROUTE } from "../../../../../../utils/constant.js";
 import { getColor } from "@/lib/utils.js";
