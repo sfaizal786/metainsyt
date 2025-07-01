@@ -1,6 +1,6 @@
 import  { RiCloseFill } from "react-icons/ri"
 import { useAppStore } from "../../../../../../store";
-import {Avatar ,AvatarImage} from '@/components/ui/Avatar.jsx'
+import {Avatar ,AvatarImage} from '@/components/ui/avatar.jsx'
 import {getColor} from '@/lib/utils.js';
 import { HOST } from '../../../../../../utils/constant.js';
 
