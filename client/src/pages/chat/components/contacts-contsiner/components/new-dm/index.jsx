@@ -18,7 +18,7 @@ import Lottie from "lottie-react";
 import { HOST, SEARCH_CONTACTS_ROUTH } from "../../../../../../utils/constant";
 import { apiClient } from "@/lib/api-client.js";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
-import { Avatar, AvatarImage } from "@/components/ui/Avatar.jsx";
+import { Avatar, AvatarImage } from "@/components/ui/avatar.jsx";
 import { useAppStore } from "../../../../../../store/index.js";
 import { getColor } from "@/lib/utils.js";
 
