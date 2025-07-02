@@ -49,7 +49,7 @@ function Profile() {
   const saveChange = async () => {
     if (validateProfile()) {
       try {
-        const response = await apiClient.post(
+        const response = await apiClient.put(
           UPDATE_PROFILE_ROUTE,
           { firstName, lastName, color: selectedcolor },
           { withCredentials: true }
