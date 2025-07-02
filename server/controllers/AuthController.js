@@ -22,8 +22,7 @@ export const signup = async(request,response,next)=>{
         const user = await User.create({empid,password});
         response.cookie("jwt",createToken(empid,user.id,{
             maxage,
-            secure:true,
-            sameSite:"None",
+       
         }));
         return response.status(201).json({user:{
             id:user.id,
@@ -53,8 +52,6 @@ export const login = async(request,response,next)=>{
         }
         response.cookie("jwt",createToken(empid,user.id,{
             maxage,
-            secure:true,
-            sameSite:"None",
         }));
         return response.status(200).json({
             user:{
@@ -201,7 +198,7 @@ return response.status(500).send("Internal Server error");
 };
 export const logout = async(request,response,next)=>{
     try{
-        response.cookie("jwt","",{maxage:1,secure:true,sameSite:"None"});
+        response.cookie("jwt","",{maxage:1,});
 
         return response.status(200).send("Logout Sucessfull.");
     }catch(err){
