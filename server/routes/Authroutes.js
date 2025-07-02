@@ -1,21 +1,35 @@
 import { Router } from "express";
-import { getUserInfo, login, signup ,updateProfile, addProfileImage,removeProfileImage, logout, } from "../controllers/AuthController.js";
+import {
+  getUserInfo,
+  login,
+  signup,
+  updateProfile,
+  addProfileImage,
+  removeProfileImage,
+  logout,
+} from "../controllers/AuthController.js";
 import { verifyToken } from "../middleware/Authmiddleware.js";
 import multer from "multer";
 
+const authRoutes = Router();
 
-const authroutes = Router();
-const upload = multer({dest:"uploads/profiles/"});
-authroutes.post("/signup", signup);
-authroutes.post("/login", login);
-authroutes.post("/updateprofile", verifyToken,updateProfile);
-authroutes.get("/userinfo", verifyToken, getUserInfo);
-authroutes.post(
-    "/addprofileimage",
-    verifyToken , 
-    upload.single("profile-image"),
-    addProfileImage
+// Configure Multer for profile image uploads
+const upload = multer({ dest: "uploads/profiles/" });
+
+// Public routes
+authRoutes.post("/signup", signup);
+authRoutes.post("/login", login);
+
+// Protected routes
+authRoutes.get("/userinfo", verifyToken, getUserInfo);
+authRoutes.put("/updateprofile", verifyToken, updateProfile);
+authRoutes.post(
+  "/addprofileimage",
+  verifyToken,
+  upload.single("profile-image"),
+  addProfileImage
 );
-authroutes.delete("/remove-profile-image", verifyToken, removeProfileImage);
-authroutes.post("/logout", logout);
-export default authroutes;
+authRoutes.delete("/remove-profile-image", verifyToken, removeProfileImage);
+authRoutes.post("/logout", verifyToken, logout); // Optional: Add verifyToken here if logout needs token validation
+
+export default authRoutes;
