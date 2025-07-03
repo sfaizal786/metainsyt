@@ -64,7 +64,7 @@ export const login = async (req, res) => {
     }
     const token = createToken(empid, user.id);
 res.cookie("jwt", token, {
-+
+
   maxAge: 3 * 24 * 60 * 60 * 1000,
 });
 
