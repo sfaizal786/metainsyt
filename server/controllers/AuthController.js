@@ -7,10 +7,10 @@ import { ioInstance, getSocketIdFromUserId } from "../socket.js"; // Adjust path
 
 
 
-const maxage = 3*24*60*1000;
+const maxAge = 3*24*60*1000;
 
 const createToken =(empid,userId)=>{
- return jwt.sign({empid,userId},process.env.JWT_KEY,{expiresIn: maxage });
+ return jwt.sign({empid,userId},process.env.JWT_KEY,{expiresIn: maxAge });
 };
 
 export const signup = async(request,response,next)=>{
@@ -21,7 +21,7 @@ export const signup = async(request,response,next)=>{
         }
         const user = await User.create({empid,password});
         response.cookie("jwt",createToken(empid,user.id,{
-            maxage,
+            maxAge,
         }));
         return response.status(201).json({user:{
             id:user.id,
@@ -50,7 +50,7 @@ export const login = async(request,response,next)=>{
               return response.status(400).send("Password is Incorrect");
         }
         response.cookie("jwt",createToken(empid,user.id,{
-            maxage,
+            maxAge,
       
         }));
         return response.status(200).json({
@@ -198,7 +198,7 @@ return response.status(500).send("Internal Server error");
 };
 export const logout = async(request,response,next)=>{
     try{
-        response.cookie("jwt","",{maxage:1,});
+        response.cookie("jwt","",{maxAge:1,});
 
         return response.status(200).send("Logout Sucessfull.");
     }catch(err){
