@@ -54,6 +54,8 @@ function Profile() {
           { firstName, lastName, color: selectedcolor },
           { withCredentials: true }
         );
+        console.log(UPDATE_PROFILE_ROUTE); // Should show: api/auth/updateprofile
+console.log(HOST); 
         if (response.status === 200 && response.data) {
           setUserInfo({ ...response.data });
           toast.success("Profile Updated Successfully");
