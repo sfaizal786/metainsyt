@@ -31,9 +31,7 @@ export const signup = async (req, res) => {
     const user = await User.create({ empid, password });
     const token = createToken(empid, user.id);
 res.cookie("jwt", token, {
-  httpOnly: true,
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-  secure: process.env.NODE_ENV === "production",
+  httpOnly: true;
   maxAge: 3 * 24 * 60 * 60 * 1000,
 });
 
@@ -66,9 +64,7 @@ export const login = async (req, res) => {
     }
     const token = createToken(empid, user.id);
 res.cookie("jwt", token, {
-  httpOnly: true,
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-  secure: process.env.NODE_ENV === "production",
+  httpOnly: true;
   maxAge: 3 * 24 * 60 * 60 * 1000,
 });
 
