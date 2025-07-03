@@ -31,12 +31,11 @@ export const signup = async (req, res) => {
     const user = await User.create({ empid, password });
     const token = createToken(empid, user.id);
 res.cookie("jwt", token, {
-  maxAge: maxAgeSeconds * 1000,
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // true in prod
   sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  secure: process.env.NODE_ENV === "production",
+  maxAge: 3 * 24 * 60 * 60 * 1000,
 });
-
     return res.status(201).json({
       user: {
         id: user.id,
@@ -65,12 +64,12 @@ export const login = async (req, res) => {
       return res.status(400).send("Password is Incorrect");
     }
     const token = createToken(empid, user.id);
-  res.cookie("jwt", token, {
-  maxAge: maxAgeSeconds * 1000,
+res.cookie("jwt", token, {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // true in prod
   sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-});
+  secure: process.env.NODE_ENV === "production",
+  maxAge: 3 * 24 * 60 * 60 * 1000,
+});;
 
     return res.status(200).json({
       user: {
