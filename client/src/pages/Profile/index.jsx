@@ -47,6 +47,8 @@ function Profile() {
   }
 
   const saveChange = async () => {
+          console.log(UPDATE_PROFILE_ROUTE); // Should show: api/auth/updateprofile
+console.log(HOST);
     if (validateProfile()) {
       try {
         const response = await apiClient.put(
@@ -54,8 +56,7 @@ function Profile() {
           { firstName, lastName, color: selectedcolor },
           { withCredentials: true }
         );
-        console.log(UPDATE_PROFILE_ROUTE); // Should show: api/auth/updateprofile
-console.log(HOST); 
+   
         if (response.status === 200 && response.data) {
           setUserInfo({ ...response.data });
           toast.success("Profile Updated Successfully");
