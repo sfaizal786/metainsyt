@@ -36,6 +36,7 @@ res.cookie("jwt", token, {
   secure: process.env.NODE_ENV === "production",
   maxAge: 3 * 24 * 60 * 60 * 1000,
 });
+
     return res.status(201).json({
       user: {
         id: user.id,
@@ -69,7 +70,8 @@ res.cookie("jwt", token, {
   sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   secure: process.env.NODE_ENV === "production",
   maxAge: 3 * 24 * 60 * 60 * 1000,
-});;
+});
+
 
     return res.status(200).json({
       user: {
