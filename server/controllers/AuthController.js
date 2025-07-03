@@ -31,7 +31,7 @@ export const signup = async (req, res) => {
     const user = await User.create({ empid, password });
     const token = createToken(empid, user.id);
 res.cookie("jwt", token, {
-  httpOnly: true;
+  httpOnly: true,
   maxAge: 3 * 24 * 60 * 60 * 1000,
 });
 
@@ -64,7 +64,7 @@ export const login = async (req, res) => {
     }
     const token = createToken(empid, user.id);
 res.cookie("jwt", token, {
-  httpOnly: true;
+  httpOnly: true,
   maxAge: 3 * 24 * 60 * 60 * 1000,
 });
 
@@ -208,8 +208,7 @@ export const logout = async (req, res) => {
     res.cookie("jwt", "", {
       maxAge: 1,
       httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+  
     });
     return res.status(200).send("Logout Successful.");
   } catch (err) {
